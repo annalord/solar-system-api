@@ -25,7 +25,7 @@ def create_planet():
     db.session.add(new_planet)
     db.session.commit()
 
-    return make_response(f"New planet {new_planet.name} succesfully created", 201)
+    return make_response(f"New planet {new_planet.name} successfully created", 201)
 
 @planet_bp.route("", methods = ["GET"])
 def read_all_planets():
