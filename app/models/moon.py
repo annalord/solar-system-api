@@ -1,23 +1,23 @@
 from app import db
 
-class Planet(db.Model):
+class Moon(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    type = db.Column(db.String, nullable=False)
-    # moon_id = db.Column(db.Integer, db.ForeignKey("moon.id"))
-    moons = db.relationship("Moon", back_populates = "planet")
+    size = db.Column(db.String, nullable=False)
+    planet_id = db.Column(db.Integer, db.ForeignKey("planet.id"))
+    planet = db.relationship("Planet", back_populates="moons")
 
     @classmethod
     def from_dict(cls,data_dict):
         return cls(name=data_dict["name"],
         description=data_dict["description"], 
-        type=data_dict["type"])
+        size=data_dict["size"])
     
     def to_dict(self):
         return dict(
             id = self.id,
             name = self.name,
             description = self.description,
-            type = self.type
+            size = self.size
         ) 
